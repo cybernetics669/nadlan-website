@@ -1,0 +1,101 @@
+/**
+ * i18n-ready dictionary. English only for MVP; add locale switch later.
+ */
+
+export type Locale = 'en';
+
+const dict: Record<Locale, Record<string, string>> = {
+  en: {
+    'site.name': 'Nadlan Premium',
+    'site.tagline': 'Israel Real Estate for International Buyers',
+    'nav.home': 'Home',
+    'nav.properties': 'Properties',
+    'nav.admin': 'Admin',
+    'home.hero.title': 'Premium Properties in Israel',
+    'home.hero.subtitle': 'Find your next home or investment in Israel. Curated listings for international buyers.',
+    'home.featured': 'Featured Listings',
+    'home.categories': 'Browse by Type',
+    'home.viewAll': 'View all properties',
+    'catalog.title': 'Property Catalog',
+    'catalog.filters': 'Filters',
+    'catalog.sort': 'Sort by',
+    'catalog.sort.newest': 'Newest',
+    'catalog.sort.priceAsc': 'Price: Low to High',
+    'catalog.sort.priceDesc': 'Price: High to Low',
+    'catalog.sort.sizeDesc': 'Size: Largest',
+    'catalog.clearFilters': 'Clear filters',
+    'catalog.noResults': 'No properties match your filters.',
+    'catalog.results': 'results',
+    'card.priceOnRequest': 'Price on request',
+    'card.beds': 'Beds',
+    'card.baths': 'Baths',
+    'card.sqm': 'm²',
+    'card.lot': 'Lot',
+    'detail.gallery': 'Gallery',
+    'detail.keyFacts': 'Key facts',
+    'detail.features': 'Features',
+    'detail.description': 'Description',
+    'detail.location': 'Location',
+    'detail.viewOnMap': 'View on map',
+    'detail.inquire': 'Inquire about this property',
+    'detail.similar': 'Similar properties',
+    'inquiry.title': 'Send an inquiry',
+    'inquiry.name': 'Your name',
+    'inquiry.email': 'Email',
+    'inquiry.phone': 'Phone (optional)',
+    'inquiry.message': 'Message',
+    'inquiry.submit': 'Send inquiry',
+    'inquiry.success': 'Thank you! We will get back to you soon.',
+    'inquiry.error': 'Something went wrong. Please try again.',
+    'admin.login': 'Admin login',
+    'admin.password': 'Password',
+    'admin.submit': 'Log in',
+    'admin.dashboard': 'Dashboard',
+    'admin.properties': 'Properties',
+    'admin.addProperty': 'Add property',
+    'admin.editProperty': 'Edit property',
+    'admin.newProperty': 'New property',
+    'admin.saveDraft': 'Save as draft',
+    'admin.publish': 'Publish',
+    'admin.unpublish': 'Unpublish',
+    'admin.delete': 'Delete',
+    'admin.images': 'Images',
+    'admin.uploadImage': 'Upload image',
+    'form.title': 'Title',
+    'form.city': 'City',
+    'form.neighborhood': 'Neighborhood',
+    'form.addressLine': 'Address (optional)',
+    'form.areaText': 'Area description (required)',
+    'form.propertyType': 'Property type',
+    'form.bedrooms': 'Bedrooms',
+    'form.bathrooms': 'Bathrooms',
+    'form.sizeSqm': 'Size (m²)',
+    'form.lotSqm': 'Lot (m²)',
+    'form.price': 'Price',
+    'form.currency': 'Currency',
+    'form.priceOnRequest': 'Price on request',
+    'form.features': 'Features (comma-separated)',
+    'form.description': 'Description (Markdown)',
+    'form.slug': 'URL slug',
+    'form.isFeatured': 'Featured listing',
+    'propertyType.Apartment': 'Apartment',
+    'propertyType.Penthouse': 'Penthouse',
+    'propertyType.Villa': 'Villa',
+    'propertyType.Land': 'Land',
+    'propertyType.Commercial': 'Commercial',
+    'propertyType.Other': 'Other',
+    'pagination.prev': 'Previous',
+    'pagination.next': 'Next',
+    'footer.rights': 'All rights reserved.',
+  },
+};
+
+const defaultLocale: Locale = 'en';
+
+export function t(key: string, locale: Locale = defaultLocale): string {
+  return dict[locale]?.[key] ?? key;
+}
+
+export function useTranslations(locale: Locale = defaultLocale) {
+  return (key: string) => t(key, locale);
+}

@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #0f172a;
+  --background: #fafafa;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --primary: #0369a1;
+  --primary-foreground: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #f1f5f9;
+    --background: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Markdown in descriptions */
+.prose-md h3 { @apply text-lg font-semibold mt-4 mb-2; }
+.prose-md p { @apply mb-2; }
+.prose-md ul { @apply list-disc pl-6 mb-2; }
+.prose-md strong { @apply font-semibold; }

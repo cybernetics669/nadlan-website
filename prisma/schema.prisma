@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PropertyType {
+  Apartment
+  Penthouse
+  Villa
+  Land
+  Commercial
+  Other
+}
+
+enum PropertyStatus {
+  Draft
+  Published
+  Sold
+}
+
+model Property {
+  id              String          @id @default(uuid())
+  slug            String          @unique
+  title           String
+  price           Float?
+  currency        String          @default("USD")
+  priceOnRequest  Boolean         @default(false)
+  country         String          @default("Israel")
+  city            String
+  neighborhood    String?
+  addressLine     String?
+  areaText        String          // required area description for map link
+  propertyType    PropertyType
+  bedrooms        Int?
+  bathrooms       Int?
+  sizeSqm         Int?
+  lotSqm          Int?
+  features        String[]        @default([]) // e.g. Sea View, Pool, Elevator
+  description     String          @db.Text
+  status          PropertyStatus  @default(Draft)
+  isFeatured      Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  images   PropertyImage[]
+  leads    Lead[]
+
+  @@map("properties")
+}
+
+model PropertyImage {
+  id         String   @id @default(uuid())
+  url        String
+  alt        String?
+  sortOrder  Int      @default(0)
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId])
+  @@map("property_images")
+}
+
+model Lead {
+  id         String   @id @default(uuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name       String
+  email      String
+  phone      String?
+  message    String   @db.Text
+  createdAt  DateTime @default(now())
+
+  @@index([propertyId])
+  @@map("leads")
+}
