@@ -14,6 +14,7 @@ const dict: Record<Locale, Record<string, string>> = {
     'home.hero.title': 'Premium Properties in Israel',
     'home.hero.subtitle': 'Find your next home or investment in Israel. Curated listings for international buyers.',
     'home.featured': 'Featured Listings',
+    'home.latest': 'Latest Listings',
     'home.categories': 'Browse by Type',
     'home.viewAll': 'View all properties',
     'catalog.title': 'Property Catalog',

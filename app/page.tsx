@@ -7,12 +7,12 @@ import { PropertyType } from '@prisma/client';
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const [featured, countsByType] = await Promise.all([
+  const [latest, countsByType] = await Promise.all([
     prisma.property.findMany({
-      where: { status: 'Published', isFeatured: true },
+      where: { status: 'Published' },
       include: { images: { orderBy: { sortOrder: 'asc' }, take: 1 } },
       take: 6,
-      orderBy: { updatedAt: 'desc' },
+      orderBy: { createdAt: 'desc' },
     }),
     prisma.property.groupBy({
       by: ['propertyType'],
@@ -46,14 +46,14 @@ export default async function HomePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-8">{t('home.featured')}</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-8">{t('home.latest')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featured.map((p) => (
+          {latest.map((p) => (
             <PropertyCard key={p.id} property={p} />
           ))}
         </div>
-        {featured.length === 0 && (
-          <p className="text-slate-500">No featured listings yet. Check back soon.</p>
+        {latest.length === 0 && (
+          <p className="text-slate-500">No listings yet. Check back soon.</p>
         )}
         <div className="mt-12 text-center">
           <Link href="/properties" className="text-primary-600 font-medium hover:underline">
