@@ -78,7 +78,7 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
           name="title"
           defaultValue={property?.title}
           required
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2"
         />
         {error.title?.[0] && <p className="text-sm text-red-600 mt-1">{error.title[0]}</p>}
       </div>
@@ -86,28 +86,28 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.city')} *</label>
-          <input name="city" defaultValue={property?.city} required className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input name="city" defaultValue={property?.city} required className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.neighborhood')}</label>
-          <input name="neighborhood" defaultValue={property?.neighborhood ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input name="neighborhood" defaultValue={property?.neighborhood ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
       </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.addressLine')}</label>
-        <input name="addressLine" defaultValue={property?.addressLine ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+        <input name="addressLine" defaultValue={property?.addressLine ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
       </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.areaText')} *</label>
-        <input name="areaText" defaultValue={property?.areaText} required className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+        <input name="areaText" defaultValue={property?.areaText} required className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         {error.areaText?.[0] && <p className="text-sm text-red-600 mt-1">{error.areaText[0]}</p>}
       </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.propertyType')} *</label>
-        <select name="propertyType" defaultValue={property?.propertyType} required className="w-full rounded-lg border border-slate-300 px-3 py-2">
+        <select name="propertyType" defaultValue={property?.propertyType} required className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2">
           {PROPERTY_TYPES.map((type) => (
             <option key={type} value={type}>{t(`propertyType.${type}`)}</option>
           ))}
@@ -117,30 +117,30 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.bedrooms')}</label>
-          <input type="number" min={0} name="bedrooms" defaultValue={property?.bedrooms ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input type="number" min={0} name="bedrooms" defaultValue={property?.bedrooms ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.bathrooms')}</label>
-          <input type="number" min={0} name="bathrooms" defaultValue={property?.bathrooms ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input type="number" min={0} name="bathrooms" defaultValue={property?.bathrooms ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.sizeSqm')}</label>
-          <input type="number" min={0} name="sizeSqm" defaultValue={property?.sizeSqm ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input type="number" min={0} name="sizeSqm" defaultValue={property?.sizeSqm ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.lotSqm')}</label>
-          <input type="number" min={0} name="lotSqm" defaultValue={property?.lotSqm ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input type="number" min={0} name="lotSqm" defaultValue={property?.lotSqm ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.price')}</label>
-          <input type="number" min={0} step={1000} name="price" defaultValue={property?.price ?? ''} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input type="number" min={0} step={1000} name="price" defaultValue={property?.price ?? ''} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.currency')}</label>
-          <input name="currency" defaultValue={property?.currency ?? 'USD'} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+          <input name="currency" defaultValue={property?.currency ?? 'USD'} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         </div>
       </div>
 
@@ -155,19 +155,19 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
           name="features"
           defaultValue={property?.features?.join(', ') ?? ''}
           placeholder="Sea View, Pool, Elevator, Parking"
-          className="w-full rounded-lg border border-slate-300 px-3 py-2"
+          className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2"
         />
       </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.description')} * (Markdown)</label>
-        <textarea name="description" defaultValue={property?.description} required rows={8} className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+        <textarea name="description" defaultValue={property?.description} required rows={8} className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
         {error.description?.[0] && <p className="text-sm text-red-600 mt-1">{error.description[0]}</p>}
       </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">{t('form.slug')}</label>
-        <input name="slug" defaultValue={property?.slug ?? ''} placeholder="Auto-generated from title + city" className="w-full rounded-lg border border-slate-300 px-3 py-2" />
+        <input name="slug" defaultValue={property?.slug ?? ''} placeholder="Auto-generated from title + city" className="w-full rounded-lg border border-slate-300 bg-white text-slate-900 px-3 py-2" />
       </div>
 
       <div className="flex items-center gap-2">
