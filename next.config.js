@@ -3,6 +3,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'placehold.co', pathname: '/**' },
+      { protocol: 'https', hostname: 'imagedelivery.net', pathname: '/**' },
     ],
     unoptimized: process.env.NODE_ENV === 'development',
   },
