@@ -60,6 +60,8 @@ const dict: Record<Locale, Record<string, string>> = {
     'admin.publish': 'Publish',
     'admin.unpublish': 'Unpublish',
     'admin.delete': 'Delete',
+    'admin.deleteProperty': 'Delete',
+    'admin.deletePropertyConfirm': 'Are you sure you want to delete this property? This cannot be undone.',
     'admin.images': 'Images',
     'admin.uploadImage': 'Upload image',
     'form.title': 'Title',

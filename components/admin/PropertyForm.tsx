@@ -21,6 +21,7 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
     property?.images?.sort((a, b) => a.sortOrder - b.sortOrder).map((img) => ({ url: img.url, alt: img.alt ?? '', sortOrder: img.sortOrder })) ?? []
   );
   const [uploading, setUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<Record<string, string[]>>({});
   const [submitStatus, setSubmitStatus] = useState<'Draft' | 'Published'>('Published');
 
@@ -61,13 +62,23 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     setError({});
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    formData.set('imageUrls', JSON.stringify(imageUrls.map((img) => img.url)));
-    formData.set('status', submitStatus);
-    const result = await action(formData);
-    if (result?.error) setError(result.error);
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      formData.set('imageUrls', JSON.stringify(imageUrls.map((img) => img.url)));
+      formData.set('status', submitStatus);
+      const result = await action(formData);
+      if (result?.error) {
+        setError(result.error);
+        setIsSubmitting(false);
+      }
+      // On success, action redirects so we won't reach here
+    } catch {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -205,11 +216,21 @@ export function PropertyForm({ action, property, submitLabel }: Props) {
       </div>
 
       <div className="flex flex-wrap gap-4">
-        <button type="submit" onClick={() => setSubmitStatus('Draft')} className="rounded-lg border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:bg-slate-50">
-          {t('admin.saveDraft')}
+        <button
+          type="submit"
+          onClick={() => setSubmitStatus('Draft')}
+          disabled={isSubmitting}
+          className="rounded-lg border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? '...' : t('admin.saveDraft')}
         </button>
-        <button type="submit" onClick={() => setSubmitStatus('Published')} className="rounded-lg bg-primary-600 px-4 py-2 font-medium text-white hover:bg-primary-700">
-          {t('admin.publish')}
+        <button
+          type="submit"
+          onClick={() => setSubmitStatus('Published')}
+          disabled={isSubmitting}
+          className="rounded-lg bg-primary-600 px-4 py-2 font-medium text-white hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? '...' : t('admin.publish')}
         </button>
       </div>
     </form>

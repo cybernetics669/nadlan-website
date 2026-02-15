@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { prisma } from '@/lib/db';
 import { t } from '@/lib/i18n';
 import { PropertyStatus } from '@prisma/client';
+import { deleteProperty } from './actions';
+import { DeletePropertyButton } from '@/components/admin/DeletePropertyButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,9 +58,14 @@ export default async function AdminPropertiesListPage() {
                   <Link href={`/properties/${p.slug}`} className="text-primary-600 hover:underline mr-3" target="_blank">
                     View
                   </Link>
-                  <Link href={`/admin/properties/${p.id}/edit`} className="text-primary-600 hover:underline">
+                  <Link href={`/admin/properties/${p.id}/edit`} className="text-primary-600 hover:underline mr-3">
                     Edit
                   </Link>
+                  <DeletePropertyButton
+                    propertyId={p.id}
+                    propertyTitle={p.title}
+                    deleteAction={deleteProperty}
+                  />
                 </td>
               </tr>
             ))}

@@ -191,3 +191,14 @@ export async function updateProperty(id: string, formData: FormData) {
   revalidatePath('/admin/properties');
   redirect('/admin/properties');
 }
+
+export async function deleteProperty(id: string) {
+  const prop = await prisma.property.findUnique({ where: { id }, select: { slug: true } });
+  if (!prop) return;
+  await prisma.property.delete({ where: { id } });
+  revalidatePath('/');
+  revalidatePath('/properties');
+  revalidatePath(`/properties/${prop.slug}`);
+  revalidatePath('/admin/properties');
+  redirect('/admin/properties');
+}
